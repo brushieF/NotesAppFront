@@ -1,0 +1,22 @@
+<div class="inputContainter">
+
+        <span class="loginText"><b>Register</b></span>
+                <form class="form"  #editForm="ngForm">                  
+                        <div class="singleInputContainer">
+                                <input type="email" class="textInput" placeholder="Email"  required ngModel  name="email" email="true" (keyup)="emailCheck(editForm.form.controls.email)"> 
+                                <div class="tick" [ngStyle]="{'opacity': emailValid ? 1 : 0.2}"><i class="material-icons">done</i></div>
+                     </div>
+                        <div class="singleInputContainer">
+                                <input type="password" class="textInput" placeholder="Password"  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required ngModel name="password" (keyup)="passwordCheck(editForm.form.controls)"> 
+                                <div class="tick" [ngStyle]="{'opacity': passwordValid ? 1 : 0.2}"><i class="material-icons">done</i></div>
+                        </div>
+                        <div class="singleInputContainer">
+                                        <input type="password" class="textInput" placeholder="Confirm Password" minlength="8" required ngModel name="passwordConfirm" (keyup)="passwordConfirm(editForm.form.value.passwordConfirm)" >
+                                        <div class="tick"  [ngStyle]="{'opacity': passwordConfirmValid ? 1 : 0.2}" ><i class="material-icons ">done</i></div>
+                                </div>
+                        
+                         
+                </form>
+    </div>
+<div id="register"   [@isLoading]="isLoading" [ngStyle]="{'opacity': isValid ? 1 : 0.2}" [ngClass]="{'no-pointer-class no-anim-class': !isValid}" class="button center pointer" (click)="createUser(editForm)"><i class="material-icons icon">done</i></div>
+<ng-template  #errorContainer></ng-template>

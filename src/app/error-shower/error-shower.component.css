@@ -1,0 +1,21 @@
+.errorContainer{
+    height: 100px;
+    width: 400px;
+    margin: auto;
+    margin-top: 40px;
+    border-radius: 20px;
+    background-color: #252525;
+    font-weight: bold;
+    font-size: 22px;
+    opacity: 0;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center;
+}
+li{   
+    text-align: center;
+    color: white;
+    list-style-type: none;
+}
+
+

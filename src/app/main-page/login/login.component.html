@@ -1,0 +1,19 @@
+<div class="inputContainter">
+
+                <span class="loginText"><b>Login</b></span>
+                        <form class="form" #editForm="ngForm">
+                                <div class="singleInputContainer">
+                                        <input type="text" class="textInput" placeholder="Email" minlength="4" ngModel name="email">
+                                        
+                                </div>
+                                <div class="singleInputContainer">
+                                        <input type="password" class="textInput" placeholder="Password" minlength="4" ngModel name="password"> 
+                                     
+                                 </div>
+                        </form>
+            </div>
+            <div id="login" class="button center pointer" (click)="loginUser(editForm)">
+                        <i class="icon material-icons">power_settings_new  </i>
+
+                </div>
+                <ng-template  #errorContainer1></ng-template>

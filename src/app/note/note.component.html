@@ -1,0 +1,37 @@
+<ng-template  #color></ng-template>
+<div *ngFor="let note of Notes;" class="noteContainer" (mouseenter)="log($event,note)" (mouseleave)="log2($event,note)"  [ngStyle]="{'width.px' :note.Width,'height.px' : note.Height, 'background-color': note.getInverterdColor()}">
+
+  <div class="noteHeader" [ngStyle]="{'background-color': note.getColor()}">
+  <div class="avatarCircle"></div>
+</div>
+  
+
+  <div class ="content"> {{note.Content}}</div>
+<div class="footer">
+    <div class="left">
+        <div class="circleButton floatLeft pointer" (click)="showColorPicker()">
+         <i class="material-icons centerIco" >
+             color_lens
+       </i></div>
+       <div class="circleButton  floatRight pointer">
+         <i class="material-icons centerIco" >
+             settings_backup_restore
+       </i></div>
+     </div>
+  <div class="right">
+  <div class="circleButton floatLeft pointer" (click)="showEditMenu(note)">
+    <i class="material-icons centerIco" >
+      edit
+    </i></div>
+  <div class="circleButton floatRight pointer">
+      <i class="material-icons centerIco" >
+          delete
+    </i></div>
+  </div>
+ 
+</div>
+  
+
+</div>
+
+

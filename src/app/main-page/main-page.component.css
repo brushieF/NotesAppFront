@@ -1,0 +1,168 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  
+    grid-template-areas: 
+      "header header"
+      "leftColumn rightColumn";
+  }
+#logo{
+    grid-area: header;
+    padding-left: 60px;
+    background-color: #252525;
+    padding-top: 10px;
+    
+}
+.grid-container {
+    display: grid;
+    grid-template-columns:  50% 50%;
+   grid-template-rows: 10% 90%;
+    height: 100%;
+    min-height: 100vh;
+  }
+  .left-column{
+
+    grid-area: leftColumn;
+   
+   
+}
+.right-column{
+    grid-area: rightColumn;
+ 
+}
+center{
+    margin-left: 50%;
+}
+.bar{
+    height: 65%;
+    width: 3px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-1.5px);
+    top:15%;
+    background-color: white;
+}
+.button{
+    margin: auto;
+    margin-top: 10%;
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    background-color: #7fc241;
+    transition: all 0.5s;
+    
+}
+@keyframes scaleUp{
+    0%{
+        transform: scale(1);
+    }
+    70%{
+
+        transform: scale(0.85);
+
+    }
+    100%{
+        transform: scale(1);
+
+    }
+}
+.icon{
+    transition: all 0.2s;
+
+
+    font-size: 100px;
+    color: white;
+    display: block;
+    line-height: 200px;
+    text-align: center;
+}
+.button:hover .icon{
+    color: #383838;
+}
+.tick>*{
+    
+    padding-left: 8px;
+    padding-top: 8px;
+    font-size: 24px;
+    color: #7fc241;
+}
+
+@keyframes pulse{
+    0%{
+            box-shadow: 0px 0px 0px 0px rgba(255,255,255,0);
+    }
+    70%{
+
+        box-shadow: 0px 0px 0px 5px #7fc241;
+    }
+    100%{
+        box-shadow: 0px 0px 0px 30px rgba(255,255,255,0);
+    }
+}
+.pulseAnim{
+    animation: pulse 1s cubic-bezier(.5,.5,0,1) infinite;
+
+}
+.button:hover{
+    background-color: white;
+    
+    animation: scaleUp 0.4s,  pulse 1s cubic-bezier(.5,.5,0,1) infinite;
+}
+.textInput{
+
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+    border-style: none;
+    outline: none;
+    margin-top:10px;
+   
+    height: 40px;
+    width: 300px;
+    border-radius: 30px;
+   
+    background-color: white;
+}
+.inputContainter{
+    margin-top: 30px;
+
+}
+.loginText{
+    font-size: 40px;
+    color: white;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; 
+    margin-bottom: 20px;
+    
+
+}
+#login{
+    margin-top:5%;
+}
+#register{
+    margin-top: 5%;
+}
+.tick{
+    transition: all 0.5s;
+    opacity: 0.2;
+    margin-left: 10px;
+    margin-top:10px;
+    border-radius: 30px;
+    height: 40px;
+    background-color: #252525;
+    width: 40px;
+}
+.singleInputContainer{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+.no-pointer-class{
+    pointer-events:none;
+}
+
+.no-anim-class{
+    animation: none !important;
+}
+

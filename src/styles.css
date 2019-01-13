@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+html, body{
+    background-color: #383838;
+    margin: 0px;
+    padding: 0px; 
+    height: 100%; 
+}
+
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.pointer{
+    cursor: pointer;
+}

@@ -1,0 +1,74 @@
+.noteContainer{
+    margin-top: 10px;
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+    max-width: 500px;
+    min-width: 300px;
+    float: left;
+    background-color: red;
+    border-radius: 15px 15px 15px 15px;
+    
+}
+
+.noteHeader{
+    width: 100%;
+    height: 70px;
+    background-color: blue;
+    border-radius: 15px 15px 0% 0%;
+}
+.avatarCircle
+{
+    width: 60px;
+    height: 60px;
+    background-color: green;
+    float: right;
+    border-radius: 50%;
+    margin: 5px;
+    
+}
+.note{
+    background-color: #fff;
+}
+.footer{
+    position: absolute;
+    bottom: 0%;
+    height: 50px;
+    width: 100%;
+    
+}
+.floatLeft
+{
+    display: inline-block;
+    padding-left: 75px;
+}
+.floatRight{
+   display: inline-block;
+   padding-left: 25px;
+   
+}
+.centerIco{
+    margin: 25%;
+}
+.left{
+    width: 50%;
+    height: 100%;
+    float: right;
+}
+.right{
+    width: 50%;
+    height: 100%;
+}
+.circleButton{
+    
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    position: absolute;
+    
+   
+}
+.centerIco:hover{
+    color: white;
+    transition: color 0.7s;
+}
