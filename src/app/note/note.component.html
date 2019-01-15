@@ -8,22 +8,11 @@
 
   <div class ="content"> {{note.Content}}</div>
 <div class="footer">
-    <div class="left">
-        <div class="circleButton floatLeft pointer" (click)="showColorPicker()">
-         <i class="material-icons centerIco" >
-             color_lens
-       </i></div>
-       <div class="circleButton  floatRight pointer">
-         <i class="material-icons centerIco" >
-             settings_backup_restore
-       </i></div>
-     </div>
-  <div class="right">
   <div class="circleButton floatLeft pointer" (click)="showEditMenu(note)">
     <i class="material-icons centerIco" >
       edit
     </i></div>
-  <div class="circleButton floatRight pointer">
+  <div class="circleButton floatRight pointer" (click)="apiTest()">
       <i class="material-icons centerIco" >
           delete
     </i></div>
@@ -32,6 +21,6 @@
 </div>
   
 
-</div>
+
 
 

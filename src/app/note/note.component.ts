@@ -8,6 +8,7 @@ import {ColorPickerComponent} from '../color-picker/color-picker.component';
 import { ModalServiceService } from '../modal-service.service';
 import { EditMenuComponent } from '../edit-menu/edit-menu.component';
 import { ComponentRef } from '@angular/core/src/render3';
+import { UserServiceService } from '../services/user-service.service';
 
 @Component({
   selector: 'app-note',
@@ -20,7 +21,7 @@ export class NoteComponent implements OnInit {
 
   Notes: Note[] = [];
 
-  constructor(private componentFactoryResolver : ComponentFactoryResolver, private modalService : ModalServiceService) { }
+  constructor(private componentFactoryResolver : ComponentFactoryResolver, private modalService : ModalServiceService, private UserServiceService : UserServiceService ) { }
 
   createMockNotes() {   
     let note1 = new Note("abc");
@@ -54,6 +55,10 @@ export class NoteComponent implements OnInit {
     console.log(this);
     this.loadComponent(this.modalService.getEditMenu(),note);
 }
+
+  apiTest(){
+    this.UserServiceService.testAPI();
+  }
   ngOnInit() {
     this.createMockNotes();
   }

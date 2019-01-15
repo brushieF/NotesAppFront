@@ -13,6 +13,7 @@ import { Token } from './Token';
 const API_TOKEN = "http://localhost:52574/Token";
 const API_REGISTER_USER = "http://localhost:52574/api/Account/Register";
 
+const API_VALUE = "http://localhost:52574/api/Values"
 
 
 @Injectable({
@@ -80,8 +81,16 @@ export class UserServiceService {
         this.ErrorEvent.next(err);
       }
       );
+  }
 
-     
+  testAPI(){
+      this.http.get(API_VALUE,this.JSONHeader()).subscribe(e=>{
+        console.log("TESTAPI");
+        console.log(e);
+      },err=>{
+        console.log("FAIL");
+        console.log(err);
+      })
   }
 
 

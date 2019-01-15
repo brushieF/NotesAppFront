@@ -50,15 +50,10 @@
 .centerIco{
     margin: 25%;
 }
-.left{
-    width: 50%;
-    height: 100%;
-    float: right;
+.center{
+    margin: auto;
 }
-.right{
-    width: 50%;
-    height: 100%;
-}
+
 .circleButton{
     
     height: 50px;

@@ -1,9 +1,7 @@
-<nav id="topBar">
-        <ul>
-                <li>NOTES</li>  
-                <li id="add"><i class="material-icons pointer iconSize" >note_add</i></li>            
-              </ul>
-</nav>
+<div id="logo">
+        <span style="color:#7fc241;font-size: 60px"><b>N</b></span>
+        <span style="color:white;font-size:45px;"><b>otes</b></span>
 
-
+        <div *ngIf="isLogged">{{User.Email}}</div>
+</div>
 

@@ -3,12 +3,14 @@ import {User} from 'src/app/users/User';
 
 import {Token} from './services/Token'
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
+  Logged : Subject<boolean> = new Subject();
+  
   loggedUser : User;
 
   constructor(public router : Router) { }
@@ -18,6 +20,7 @@ export class AuthService {
       return false;
   }
   proceedToNotes(){
+      this.Logged.next(true);
       this.router.navigateByUrl("/notes");
   }
 
