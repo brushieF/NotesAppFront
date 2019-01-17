@@ -7,8 +7,16 @@ export class Color implements IColor{
     G: number;
     B: number;
 
-    constructor(){
-         this.getRandomColor();
+   
+    constructor(R? : number, G? : number, B? : number){
+        if(R==undefined){
+         this.getRandomColor();                
+        }else{
+            this.R = R;
+            this.G = G;
+            this.B = B;
+        }
+
     }
     
     newInstance(){
@@ -22,8 +30,8 @@ export class Color implements IColor{
 
     getRandomColor(){
         let colors : number[] = [];     
-        for(let i =0;i<3;i++){           
-           colors.push((((Math.random())*50)+150));
+        for(let i =0;i<3;i++){         
+           colors.push((((Math.random())*50)+150)).toFixed(0);
         }
         this.assingColors(colors);
        

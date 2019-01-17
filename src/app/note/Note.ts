@@ -15,8 +15,8 @@ export class Note implements INote{
     Date: Date;
     Color : IColor;
     
+    NoteID : number;
     
-
     Content: string;
     
     
@@ -28,11 +28,12 @@ export class Note implements INote{
 
     MousePosSubscription : Subscription;
     
-    constructor(content : string, color : IColor = new Color()){
+    constructor(content : string, color : IColor = new Color(),noteID? : number){
 
         this.Date = new Date();
         this.Color  = color;
-        this.Content = content;       
+        this.Content = content;
+        this.NoteID = noteID;       
     }
 
     getColor(){
@@ -65,9 +66,12 @@ export class Note implements INote{
         this.Content = a.toString();
         console.log("Pozycaj");
     }
-    
-    
-
+    serialize() : string{
+        var obj;
+        if(this.NoteID==null) obj = { Content : this.Content, R : this.Color.R.toFixed(0), G : this.Color.G.toFixed(0), B : this.Color.B.toFixed(0)};
+                        else  obj = { Content : this.Content, R : this.Color.R.toFixed(0), G : this.Color.G.toFixed(0), B : this.Color.B.toFixed(0), NoteID : this.NoteID};
+        return JSON.stringify(obj);                             
+    }
 
 
 

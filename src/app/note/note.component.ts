@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit, ElementRef, ViewContainerRef, Type, ComponentFactoryResolver, TemplateRef } from '@angular/core';
 import { Note } from './Note';
 import { Color } from './Color';
+import { map } from 'rxjs/operators';
 
 
 
@@ -23,19 +24,7 @@ export class NoteComponent implements OnInit {
 
   constructor(private componentFactoryResolver : ComponentFactoryResolver, private modalService : ModalServiceService, private UserServiceService : UserServiceService ) { }
 
-  createMockNotes() {   
-    let note1 = new Note("abc");
-    let note2 = new Note("abasdsac");
-    note1.Height = 400;
-    note1.Width = 200;
 
-    note2.Width = 150;
-    note2.Height = 200;
-
-    
-    this.Notes.push(note1);
-    this.Notes.push(note2);
-  }
   loadComponent(type, data?){
     let componentFactor = this.componentFactoryResolver.resolveComponentFactory(type);
 
@@ -56,21 +45,39 @@ export class NoteComponent implements OnInit {
     this.loadComponent(this.modalService.getEditMenu(),note);
 }
 
-  apiTest(){
-    this.UserServiceService.testAPI();
-  }
-  ngOnInit() {
-    this.createMockNotes();
-  }
-  ngAfterViewInit(): void {
-    
 
-    
+  ngOnInit() {
+    this.UserServiceService.loadNotes().subscribe(e=>this.mapNotes(e));
+  }
+  mapNotes(notes : any){
+      notes.map(e=>{
+        console.log(e);
+          var note = new Note(e.Content,new Color(e.R,e.G,e.B),e.NoteID);
+          this.Notes.push(note);
+          console.log(note);
+      }        
+      )
+      console.log(this.Notes);
+  }
+  ngAfterViewInit(): void {   
+   // this.sendTest(); 
   }
  
+  sendTest(){
+    var note = new Note("dasd",new Color());
+    this.UserServiceService.sendNote(note);
+  }
+
+  deleteNote(note : Note){
+      console.log("ID NOTATKI");
+      console.log(note);
+      this.Notes.splice(this.Notes.indexOf(note),1);
+      this.UserServiceService.deleteNote(note.NoteID);
+  }
 
   log(e, i: Note) {
     i.addListeners();
+
 
 
   }

@@ -4,8 +4,7 @@ import { User } from '../users/User'
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { Token } from './Token';
-
-
+import { Note } from '../note/Note';
 
 
 
@@ -13,7 +12,7 @@ import { Token } from './Token';
 const API_TOKEN = "http://localhost:52574/Token";
 const API_REGISTER_USER = "http://localhost:52574/api/Account/Register";
 
-const API_VALUE = "http://localhost:52574/api/Values"
+const API_NOTES = "http://localhost:52574/api/Notes"
 
 
 @Injectable({
@@ -44,6 +43,7 @@ export class UserServiceService {
   loginDataFormatter(email : string, password : string){
         return "grant_type=password&username="+email+"&password="+password;
   }
+
 
   loginUser(email : string, password : string){
     this.LoadingEvent.next(true); 
@@ -83,17 +83,18 @@ export class UserServiceService {
       );
   }
 
-  testAPI(){
-      this.http.get(API_VALUE,this.JSONHeader()).subscribe(e=>{
-        console.log("TESTAPI");
-        console.log(e);
-      },err=>{
-        console.log("FAIL");
-        console.log(err);
-      })
+  loadNotes() : Observable<any>{
+   return this.http.get(API_NOTES,this.JSONHeader()); 
+  }
+  sendNote(note : Note){
+    console.log(note.serialize())
+    this.http.post(API_NOTES,note.serialize(),this.JSONHeader()).subscribe(e=>console.log(e),e=>console.log(e));
   }
 
-
+  deleteNote(noteID : number){
+    console.log("kasuje chuja");
+      this.http.delete(API_NOTES+"/"+noteID,this.JSONHeader()).subscribe(e=>console.log(e),e=>console.log(e));
+  }
 
 
 }
