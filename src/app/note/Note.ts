@@ -23,10 +23,6 @@ export class Note implements INote{
     Height : number;
     Width : number;
 
-    PosX : number;
-    PosY : number;
-
-    MousePosSubscription : Subscription;
     
     constructor(content : string, color : IColor = new Color(),noteID? : number){
 
@@ -45,27 +41,8 @@ export class Note implements INote{
     assignColors(){
         this.Color.getRandomColor();
     }
-    addListeners(){
-        var a =  fromEvent(window, 'mousemove');
-        var b = a.pipe(debounce(() =>timer(100)));
-       
-
-        this.MousePosSubscription = b.subscribe((res : MouseEvent)=>{
-            this.log(res.clientX,res.clientY);
-        });
-    }
-
-    removeListeners(){
-        this.MousePosSubscription.unsubscribe();
-        
-        console.log("opuscil");
-    }
 
 
-    log(a : number, b: number){
-        this.Content = a.toString();
-        console.log("Pozycaj");
-    }
     serialize() : string{
         var obj;
         if(this.NoteID==null) obj = { Content : this.Content, R : this.Color.R.toFixed(0), G : this.Color.G.toFixed(0), B : this.Color.B.toFixed(0)};

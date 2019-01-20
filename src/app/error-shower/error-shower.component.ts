@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Animation } from '../main-page/buttonAnim';
 
@@ -8,14 +8,11 @@ import { Animation } from '../main-page/buttonAnim';
   styleUrls: ['./error-shower.component.css'],
   animations: [Animation.hideAnim] 
 })
-export class ErrorShowerComponent implements OnInit {
+export class ErrorShowerComponent {
 
   shallHide : boolean = false;
   errorContent : string[];
 
-  ngOnInit() {
-
-  }
  
   ngAfterViewInit(): void {
     this.shallHide = true;

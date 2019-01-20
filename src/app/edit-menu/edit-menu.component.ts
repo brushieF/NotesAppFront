@@ -1,7 +1,7 @@
-import { Component, OnInit, ComponentRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {Note } from '../note/Note';
-import { INote } from '../note/INote';
-import { IColor } from '../note/IColor';
+import { EditMenuActions } from './editMenuActions';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -11,46 +11,33 @@ import { IColor } from '../note/IColor';
 })
 
 
-export class EditMenuComponent implements OnInit, INote {
-  Date: Date;
-  Color : IColor;
-  Content: string;
+export class EditMenuComponent implements OnInit {
 
-  @Output() public onDelete: EventEmitter<any> = new EventEmitter();
+ 
+  public EditMenuSubscriber : Subject<number>;
+  public Note : Note;
+  private _Note : Note;
   
-  public _Note : Note;
-  content : string;
-  private Note : Note;
-  ngOnInit() {
-    this.Note = new Note(this._Note.Content, this._Note.Color.newInstance());
-    
-   // this.Note = this._Note;
-    this.assignValues();
+  ngOnInit(){
+    this._Note = new Note(this.Note.Content,this.Note.Color.newInstance());
+    console.log(this.Note);
   }
-  assignValues(){
-    
-  }
-
+ 
   randomizeColors(){    
-    this.Note.assignColors();
+    this._Note.assignColors();
+    this.EditMenuSubscriber.next(EditMenuActions.ChangeColor);
   }
   save(content : string){
-    console.log("SAVING NOTE");
-    console.log(content);
+    this.Note.Color = this._Note.Color;
+    this.Note.Content = content;
+    this.EditMenuSubscriber.next(EditMenuActions.Save);
   }
   back(){
-    console.log("BACK");
-    this.destroy();
-  }
-  destroy(){
-    this.onDelete.emit("DESTROYING EDIT MENU COMOPNENT");        
+    this.EditMenuSubscriber.next(EditMenuActions.Back);
   }
   deleteNote(){
-    this.destroy();
-      console.log("DELETING NOTE");
+    this.EditMenuSubscriber.next(EditMenuActions.Delete);
   }
-  getEventEmitter() : EventEmitter<any>{
-    return this.onDelete;
-  }
+ 
  
 }

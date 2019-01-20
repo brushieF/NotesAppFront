@@ -1,88 +1,97 @@
-import { Component, ViewChild, OnInit, ElementRef, ViewContainerRef, Type, ComponentFactoryResolver, TemplateRef } from '@angular/core';
+import { Component, ViewChild, OnInit,  ViewContainerRef } from '@angular/core';
 import { Note } from './Note';
 import { Color } from './Color';
-import { map } from 'rxjs/operators';
 
 
 
-import {ColorPickerComponent} from '../color-picker/color-picker.component';
+
 import { ModalServiceService } from '../modal-service.service';
-import { EditMenuComponent } from '../edit-menu/edit-menu.component';
-import { ComponentRef } from '@angular/core/src/render3';
 import { UserServiceService } from '../services/user-service.service';
+import { ServiceSubscriber } from '../error-shower/error-subscriber';
+import { Subject } from 'rxjs';
+import { EditMenuActions } from '../edit-menu/editMenuActions';
+
 
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.css']
 })
-export class NoteComponent implements OnInit {
-  @ViewChild('color', {read: ViewContainerRef}) color;
+export class NoteComponent extends ServiceSubscriber implements OnInit {
+  @ViewChild('noteEdit', {read: ViewContainerRef}) noteEdit;
 
+  EditMenuSubscriber : Subject<number> = new Subject();
 
   Notes: Note[] = [];
 
-  constructor(private componentFactoryResolver : ComponentFactoryResolver, private modalService : ModalServiceService, private UserServiceService : UserServiceService ) { }
-
-
-  loadComponent(type, data?){
-    let componentFactor = this.componentFactoryResolver.resolveComponentFactory(type);
-
-    let viewContainter = this.color;
-    viewContainter.clear();
-    
-    let componentRef  : ComponentRef<any> = viewContainter.createComponent(componentFactor);
-    componentRef.instance._Note = data;
-
-    componentRef.instance.getEventEmitter().subscribe(x=>viewContainter.clear());
-    
-  }
-  showColorPicker(){
-      this.loadComponent(this.modalService.getColorPicker());
-  }
+  private CurrentlyEditing : Note;
+  constructor(private modal : ModalServiceService, private UserServiceService : UserServiceService ) { super(modal)}
+  
+  
   showEditMenu(note){
-    console.log(this);
-    this.loadComponent(this.modalService.getEditMenu(),note);
+    this.CurrentlyEditing = note;
+    super.makeEditModal(this.noteEdit, note, this.EditMenuSubscriber);
 }
-
+editMenuSubscribe() {
+  
+    this.EditMenuSubscriber.subscribe(e => {
+      console.log(e);
+      console.log("TUI");
+        switch (e) {
+          case EditMenuActions.Back : {
+            console.log("BACK");
+            super.destroyEditModal(this.noteEdit);
+            break;
+          }
+          case EditMenuActions.ChangeColor : {
+              console.log("CHANGE COLOR");
+              break;
+          }
+          case EditMenuActions.Delete : {
+              console.log("DELETING NOTE");
+              this.deleteNote(this.CurrentlyEditing);
+              super.destroyEditModal(this.noteEdit);
+              break;
+          }
+          case EditMenuActions.Save : {
+            console.log("SAVING NOTE");
+            this.updateNote();
+            super.destroyEditModal(this.noteEdit);
+            break;
+          }
+        }     
+    })
+  }
 
   ngOnInit() {
     this.UserServiceService.loadNotes().subscribe(e=>this.mapNotes(e));
+     this.editMenuSubscribe();
   }
+
   mapNotes(notes : any){
       notes.map(e=>{
-        console.log(e);
           var note = new Note(e.Content,new Color(e.R,e.G,e.B),e.NoteID);
           this.Notes.push(note);
-          console.log(note);
-      }        
+        }        
       )
-      console.log(this.Notes);
   }
   ngAfterViewInit(): void {   
-   // this.sendTest(); 
+     // this.sendTest(); 
   }
  
   sendTest(){
     var note = new Note("dasd",new Color());
     this.UserServiceService.sendNote(note);
   }
-
+  updateNote(){
+    console.log("EDYTOWANA NOTATKA");
+    this.UserServiceService.updateNote(this.CurrentlyEditing);
+  }
   deleteNote(note : Note){
       console.log("ID NOTATKI");
       console.log(note);
       this.Notes.splice(this.Notes.indexOf(note),1);
       this.UserServiceService.deleteNote(note.NoteID);
-  }
-
-  log(e, i: Note) {
-    i.addListeners();
-
-
-
-  }
-  log2(e, i: Note) {
-        i.removeListeners();
   }
 
 }

@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { NoteComponent } from './note/note.component';
 import { EditMenuComponent } from './edit-menu/edit-menu.component';
-import { ColorPickerComponent } from './color-picker/color-picker.component';
 import { ModalServiceService } from './modal-service.service';
 import { RegisterComponent } from './main-page/register/register.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -29,7 +28,6 @@ import { AuthService } from './auth.service';
     TopBarComponent,
     NoteComponent,
     EditMenuComponent,
-    ColorPickerComponent,
     RegisterComponent,
     MainPageComponent,
     LoginComponent,
@@ -50,7 +48,6 @@ import { AuthService } from './auth.service';
             {  provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true }],
   bootstrap: [AppComponent],
   entryComponents:[
-    ColorPickerComponent,
     EditMenuComponent,
     ErrorShowerComponent
   ]

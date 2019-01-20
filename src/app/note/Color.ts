@@ -18,7 +18,7 @@ export class Color implements IColor{
         }
 
     }
-    
+   
     newInstance(){
         let newColor : Color = new Color();
         newColor.R = this.R;

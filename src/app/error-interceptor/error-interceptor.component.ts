@@ -14,7 +14,7 @@ export class ErrorInterceptorComponent implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler) : Observable<HttpEvent<any>>{
     return next.handle(request).pipe(catchError(e => {
       if(e.status === 400){
-          console.log("unathorized");
+          console.log("Unathorized");
       }
       else if(e.status ===401){
 
@@ -22,12 +22,9 @@ export class ErrorInterceptorComponent implements HttpInterceptor {
       else if(e.status === 0){
           
           e.statusText = "Connection timed out"
-      }
-      console.log(e);
-      console.log(typeof(e.statusText));      
+      }  
       var error = e.error.ModelState || e.error.error_description || e.statusText;
-
-      
+   
       if(typeof(error)==="object") error = Object.values(error);
       if(typeof(error)==="string") error = Array.of(error);
       return throwError(error);

@@ -1,18 +1,12 @@
-import { Injectable, Output } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { User } from '../users/User'
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { Token } from './Token';
 import { Note } from '../note/Note';
 
-
-
-
-const API_TOKEN = "http://localhost:52574/Token";
-const API_REGISTER_USER = "http://localhost:52574/api/Account/Register";
-
-const API_NOTES = "http://localhost:52574/api/Notes"
+import { API } from './/ApiCalls'
 
 
 @Injectable({
@@ -23,7 +17,6 @@ export class UserServiceService {
  LoadingEvent : Subject<any> = new Subject();
  ErrorEvent : Subject<any> = new Subject();
   constructor(private http : HttpClient, private authService : AuthService) { 
-
 
   }
 
@@ -48,8 +41,7 @@ export class UserServiceService {
   loginUser(email : string, password : string){
     this.LoadingEvent.next(true); 
 
-      this.http.post(API_TOKEN,this.loginDataFormatter(email, password),this.URLEncodedHeader()).subscribe((e : any)=>{
-        
+      this.http.post(API.Token,this.loginDataFormatter(email, password),this.URLEncodedHeader()).subscribe((e : any)=>{
         this.LoadingEvent.next(false);
         this.ErrorEvent.next(true);
         
@@ -71,7 +63,7 @@ export class UserServiceService {
     
     this.LoadingEvent.next(true); 
     console.log(this.LoadingEvent);
-      this.http.post(API_REGISTER_USER,user.stringify(),this.JSONHeader()).subscribe(e=>{
+      this.http.post(API.RegisterUser,user.stringify(),this.JSONHeader()).subscribe(e=>{
         this.LoadingEvent.next(false);
         this.ErrorEvent.next(true)
         return e;
@@ -84,16 +76,18 @@ export class UserServiceService {
   }
 
   loadNotes() : Observable<any>{
-   return this.http.get(API_NOTES,this.JSONHeader()); 
+   return this.http.get(API.Notes,this.JSONHeader()); 
   }
   sendNote(note : Note){
     console.log(note.serialize())
-    this.http.post(API_NOTES,note.serialize(),this.JSONHeader()).subscribe(e=>console.log(e),e=>console.log(e));
+    this.http.post(API.Notes,note.serialize(),this.JSONHeader()).subscribe(e=>console.log("Successful Send"),e=>console.log("Send not successful!"));
+  }
+  updateNote(note : Note){
+      this.http.put(API.Notes+"/"+note.NoteID,note.serialize(),this.JSONHeader()).subscribe(e=>console.log("Successful Update"),e=>console.log("Update not successful!"));
   }
 
   deleteNote(noteID : number){
-    console.log("kasuje chuja");
-      this.http.delete(API_NOTES+"/"+noteID,this.JSONHeader()).subscribe(e=>console.log(e),e=>console.log(e));
+      this.http.delete(API.Notes+"/"+noteID,this.JSONHeader()).subscribe(e=>console.log("Successful delete!"),e=>console.log("Deleting not successful!"));
   }
 
 

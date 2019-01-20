@@ -1,6 +1,6 @@
 <div id="fakeBg" ></div>
 <div class="container">
-<div class="editMenuBar" [ngStyle]="{'background-color': Note.getColor()}">
+<div class="editMenuBar" [ngStyle]="{'background-color': _Note.getColor()}">
        <i (click)="back()" class="material-icons iconSize pointer">arrow_back</i>
        <i (click)="save(textArea.value)"class="material-icons iconSize pointer">save</i>
        <i (click)="randomizeColors()" class="material-icons iconSize pointer" >color_lens</i>
@@ -9,6 +9,6 @@
 
 </div>
 
-<textarea  #textArea [ngStyle]="{'background-color': Note.getInverterdColor()}">{{_Note.Content}}</textarea>
+<textarea  #textArea [ngStyle]="{'background-color': _Note.getInverterdColor()}">{{_Note.Content}}</textarea>
 
 </div>
