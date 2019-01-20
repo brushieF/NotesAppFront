@@ -1,7 +1,16 @@
+<div class="topBar">
 <div id="logo">
         <span style="color:#7fc241;font-size: 60px"><b>N</b></span>
         <span style="color:white;font-size:45px;"><b>otes</b></span>
 
-        <div *ngIf="isLogged">{{User.Email}}</div>
+      
 </div>
-
+<div class="loggedContainer" *ngIf="isLogged">              
+        <div class="topBarButton" (click)="addNote()" > 
+                <i class="material-icons ico pointer">add</i>
+        </div>
+        <div class="topBarButton" style="position: absolute;right: 0;" (click)="logOut()"> 
+                        <i class="material-icons ico pointer" style="margin-left: 15%">power_settings_new</i>
+                </div>
+</div>
+</div>

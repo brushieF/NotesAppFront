@@ -77,7 +77,7 @@ export class RegisterComponent extends ServiceSubscriber implements OnInit  {
       });
   }
   clearError(){
-    super.destroyErrorModal(this.errorContainter);
+    super.destroyModal(this.errorContainter);
   }
 
   loadingSubscribe(){
@@ -105,11 +105,5 @@ export class RegisterComponent extends ServiceSubscriber implements OnInit  {
   checkIfValid(){
     if(this.emailValid && this.passwordValid && this.passwordConfirmValid) this.isValid = true;
       else this.isValid = false;
-
-
   }
-
-
-
-
 }

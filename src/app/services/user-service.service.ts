@@ -14,12 +14,15 @@ import { API } from './/ApiCalls'
 })
 export class UserServiceService {
   
- LoadingEvent : Subject<any> = new Subject();
- ErrorEvent : Subject<any> = new Subject();
+
+  NewNoteEvent : Subject<any> = new Subject();
+  LoadingEvent : Subject<any> = new Subject();
+  ErrorEvent : Subject<any> = new Subject();
   constructor(private http : HttpClient, private authService : AuthService) { 
 
   }
 
+  
   JSONHeader() : any{
     var header = new HttpHeaders({'Content-Type' : 'application/json'});
    
@@ -80,7 +83,12 @@ export class UserServiceService {
   }
   sendNote(note : Note){
     console.log(note.serialize())
-    this.http.post(API.Notes,note.serialize(),this.JSONHeader()).subscribe(e=>console.log("Successful Send"),e=>console.log("Send not successful!"));
+    this.http.post(API.Notes,note.serialize(),this.JSONHeader()).subscribe(e=>
+      {
+        console.log("Successful Send");
+        console.log(note);
+        note.NoteID == null ? this.NewNoteEvent.next(false) : null;
+      },e=>console.log("Send not successful!"));
   }
   updateNote(note : Note){
       this.http.put(API.Notes+"/"+note.NoteID,note.serialize(),this.JSONHeader()).subscribe(e=>console.log("Successful Update"),e=>console.log("Update not successful!"));

@@ -1,5 +1,43 @@
+.topBar{
+    background-color: #252525;
+    height: 90px;
+    width: 100%;
+    display: flex;
+}
 #logo{
     padding-left: 60px;
-    background-color: #252525;
-    padding-top: 10px;   
+    padding-top: 10px;  
+    float: left;
 }
+.loggedContainer{
+    display: flex;
+    position: relative;
+    float: left;
+    height: 90px;
+    margin-left: 50px;
+    width: 100%;
+}
+
+.topBarButton{
+    background-color: #7fc241;
+    height: 90px;
+    transition: all 0.5s;
+    position: relative;
+     width: 100px;
+}
+.ico{
+    color: white;
+    font-size: 70px;
+    margin: 12%;
+    transition: all 0.5s;
+
+}
+
+.topBarButton:hover{
+    background-color: white;
+}
+
+.topBarButton:hover .ico{
+    color: #383838;
+}
+

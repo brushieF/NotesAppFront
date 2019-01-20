@@ -20,9 +20,6 @@ export class ModalServiceService {
      return componentRef;
     }
 
-
-
-
     loadError(viewContainter : ViewContainerRef, errorData : any){
        let componentRef = this.loadComponent(viewContainter,ErrorShowerComponent);   
         componentRef.instance.errorContent = errorData;

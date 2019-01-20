@@ -2,15 +2,6 @@ import {INote} from './INote';
 import { IColor } from './IColor';
 import { Color } from './Color';
 
-
-import { fromEvent, Subscription } from 'rxjs';
-import { debounce } from 'rxjs/operators';
-import { timer } from 'rxjs';
-import { Observable } from 'rxjs';
-
-
-
-
 export class Note implements INote{
     Date: Date;
     Color : IColor;
@@ -24,11 +15,10 @@ export class Note implements INote{
     Width : number;
 
     
-    constructor(content : string, color : IColor = new Color(),noteID? : number){
-
+    constructor(content? : string, color : IColor = new Color(),noteID? : number){
+        content == undefined  ? this.Content = "" : this.Content = content;
         this.Date = new Date();
         this.Color  = color;
-        this.Content = content;
         this.NoteID = noteID;       
     }
 

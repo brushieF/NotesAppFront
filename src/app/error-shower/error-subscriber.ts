@@ -13,10 +13,8 @@ export class ServiceSubscriber{
     makeEditModal(container : ViewContainerRef, note : Note, editMenuSubscriber : Subject<number>){
         this.modalService.loadEditMenu(container, note, editMenuSubscriber);
     }
-    destroyErrorModal(errorContainter : ViewContainerRef){
-        errorContainter.clear();
-    }
-    destroyEditModal(container : ViewContainerRef){
+    destroyModal(container : ViewContainerRef)
+    {
         container.clear();
     }
 }

@@ -23,6 +23,11 @@ export class AuthService {
       this.Logged.next(true);
       this.router.navigateByUrl("/notes");
   }
+  logOut(){
+    this.Logged.next(false);
+    this.loggedUser = null;
+    this.router.navigateByUrl("");
+  }
 
   printLoggedUser(){
     console.log("Currently logged: ")

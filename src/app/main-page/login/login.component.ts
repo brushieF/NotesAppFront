@@ -1,13 +1,11 @@
 import { Component, OnInit, ViewContainerRef, ViewChild} from '@angular/core';
-import { Form, NgForm, EmailValidator } from '@angular/forms';
+import {  NgForm } from '@angular/forms';
 import { UserServiceService } from '../../services/user-service.service';
 import {ServiceSubscriber} from '../../error-shower/error-subscriber';
-
-import { User } from '../../users/User';
 import { ModalServiceService } from '../../modal-service.service';
 
 import { Subscriber } from 'rxjs';
-import { SWITCH_COMPILE_INJECTABLE__POST_R3__ } from '@angular/core/src/di/injectable';
+
 
 
 @Component({
@@ -39,7 +37,7 @@ export class LoginComponent extends ServiceSubscriber implements OnInit {
     });
 }
 clearError(){
-  super.destroyErrorModal(this.errorContainter);
+  super.destroyModal(this.errorContainter);
 }
   
   loginUser(form : NgForm){    
