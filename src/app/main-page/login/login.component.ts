@@ -31,6 +31,8 @@ export class LoginComponent extends ServiceSubscriber implements OnInit {
   })};
   errorsSubscribe(){
     this.userService.ErrorEvent.subscribe(e=>{
+      console.log(e)
+      console.log("JEST ERROR")
       this.clearError();
       if(e.isLogin) super.makeErrorModal(e,this.errorContainter);
       
